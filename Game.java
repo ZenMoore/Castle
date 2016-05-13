@@ -2,16 +2,23 @@ package castle;
 
 import java.util.HashMap;
 import java.util.Scanner;
+import java.awt.*;
+import javax.swing.*;
 
-public class Game {
+public class Game extends window{
 	private String admin;
 	private Room currentRoom;
 	private HashMap<String,Handler> handlers=new HashMap<String,Handler>();
-
+	
 	public void setAdmin(){ 
-		Scanner in=new Scanner(System.in);
-		System.out.println("游戏开始前，请输入你的名字：");
-		admin=in.nextLine();
+//		Scanner in=new Scanner(System.in);
+//		System.out.println("游戏开始前，请输入你的名字：");
+//		admin=in.nextLine();
+		this.setArea("游戏开始前，请输入你的名字：");
+	}
+	
+	public static void switchCase(String content){
+		
 	}
 	
 	public String getAdmin(){
@@ -20,6 +27,7 @@ public class Game {
 	
 	//make a game with the control handler
 	public Game() {
+		super();
 		handlers.put("Go", new HandlerGo(this));
 		handlers.put("Attack",new HandlerAttack(this));
 		handlers.put("Defense",new HandlerDefense(this));
@@ -28,18 +36,32 @@ public class Game {
 		createRooms();
 	}
 	
+	
+	
 	//print welcome and comment.
 	public  void welcome(){
-		System.out.println("欢迎来到城堡！");
-		System.out.println("这是一个超级变态的游戏。");
-		System.out.println("输入 Go(空格)(房间名) 进入。");
-		System.out.println("输入 Attack(空格)(怪物名) 进攻。");
-		System.out.println("输入 Defense(空格)(怪物名) 防守。");
-		System.out.println("输入 See 查看标语。");
-		System.out.println("如果你不按格式写得话，会一各种理由死掉，就是结束程序，不要问我为什额。");
-		System.out.println("对了，为了方便你的输入，怪物名是这样的:(小写英文字母)(数字)(小写英文字母)");
-		System.out.println("还有就是，Door就是有点儿奇怪的任意门。");
-		System.out.println("祝你好孕！");
+//		System.out.println("欢迎来到城堡！");
+//		System.out.println("这是一个超级变态的游戏。");
+//		System.out.println("输入 Go(空格)(房间名) 进入。");
+//		System.out.println("输入 Attack(空格)(怪物名) 进攻。");
+//		System.out.println("输入 Defense(空格)(怪物名) 防守。");
+//		System.out.println("输入 See 查看标语。");
+//		System.out.println("如果你不按格式写得话，会一各种理由死掉，就是结束程序，不要问我为什额。");
+//		System.out.println("对了，为了方便你的输入，怪物名是这样的:(小写英文字母)(数字)(小写英文字母)");
+//		System.out.println("还有就是，Door就是有点儿奇怪的任意门。");
+//		System.out.println("祝你好孕！");
+		StringBuffer buffer=new StringBuffer();
+		buffer.append("欢迎来到城堡！/n");
+		buffer.append("这是一个超级变态的游戏。");
+		buffer.append("输入 Go(空格)(房间名) 进入。");	
+		buffer.append("输入 Attack(空格)(怪物名) 进攻。");
+		buffer.append("输入 Defense(空格)(怪物名) 防守。");
+		buffer.append("输入 See 查看标语。");
+		buffer.append("如果你不按格式写得话，会一各种理由死掉，就是结束程序，不要问我为什额。");
+		buffer.append("对了，为了方便你的输入，怪物名是这样的:(小写英文字母)(数字)(小写英文字母)");
+		buffer.append("还有就是，Door就是有点儿奇怪的任意门。");
+		buffer.append("祝你好孕！");
+		this.setArea(buffer.toString());
 	}
 	
 	//create rooms of this game.
@@ -47,7 +69,7 @@ public class Game {
 public void createRooms(){
 		Room outside,yiA,yiB,yiC,yiD,erE,erF,erG,dadianI,sanH,sanJ,sanK,out;
 		outside=new Room("外面",admin+",这是个灭绝的时代，黄沙满天，你的师傅翁恺告诉你，要想获得性福，必须到达城堡的另一边",5);
-		yiA=new Room("1A",null,0);	yiB=new Room("1B",admin+",这里有通关秘籍qq群475927178",1);yiC=new Room("1C",null,2);yiD=new Room("1D",null,3);
+		yiA=new Room("1A",null,0);	yiB=new Room("1B",admin+",这里有通关秘籍qq1057398161",1);yiC=new Room("1C",null,2);yiD=new Room("1D",null,3);
 		erE=new Room("2E",null,4);erF=new Room("2F","To Die",12);erG=new Room("2G",null,10);
 		sanH=new Room("3H",null,11);sanJ=new Room("3J",null,8);sanK=new Room("3K",admin+",这里有通关秘籍qq群475927178",9);
 		dadianI=new Room("Palace I","To Die",6);
@@ -84,7 +106,7 @@ public void createRooms(){
 	//show the exits that you can go to.
 	public void showExit(){
 		if(currentRoom.getExits().isEmpty()){
-			System.out.println("加qq群475927178");
+			System.out.println("加qq1057398161");
 			System.out.println("再见了，你终于成功了！");
 			System.exit(-1);
 		}
@@ -184,12 +206,10 @@ public void createRooms(){
 		}
 	}
 
-	public static void main(String[] args) {
-		Scanner in=new Scanner(System.in);
+	public static void run() {
 		Game game=new Game();
 		game.welcome();
 		game.play();
-		in.close();
 	
 	}
 
